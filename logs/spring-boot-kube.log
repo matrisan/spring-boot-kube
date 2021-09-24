@@ -1,0 +1,2 @@
+2021-09-24 03:41:21.135  INFO 35570 --- [lettuce-eventExecutorLoop-8-4] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was /127.0.0.1:6379
+2021-09-24 03:41:34.313  WARN 35570 --- [SpringApplicationShutdownHook] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [127.0.0.1:6379]: java.util.concurrent.CancellationException

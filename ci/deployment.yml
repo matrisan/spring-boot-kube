@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-kube
+  namespace: spring-boot-kube-ns
+  labels:
+    app: spring-boot-kube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-kube
+  template:
+    metadata:
+      name: spring-boot-kube
+      labels:
+        app: spring-boot-kube
+    spec:
+      containers:
+        - name: spring-boot-kube
+          image: registry.cn-hangzhou.aliyuncs.com/shishaodong/spring-boot-kube:0.0.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 200m
+              memory: 800Mi
+            requests:
+              cpu: 200m
+              memory: 800Mi
+          readinessProbe:
+            httpGet:
+              port: 9090
+              path: /actuator/health/readiness
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              port: 9090
+              path: /actuator/health/liveness
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            failureThreshold: 3
+#          envFrom:
+#            - secretRef:
+#                name: spring-boot-kube-secret
+          volumeMounts:
+            - mountPath: /workspace/config
+              name: kube-configmap
+      volumes:
+        - name: kube-configmap
+          configMap:
+            name: spring-boot-kube-configmap
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-kube-service
+  namespace: spring-boot-kube-ns
+spec:
+  selector:
+    app: spring-boot-kube
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: NodePort
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: spring-boot-kube-secret
+  namespace: spring-boot-kube-ns
+data:
+  spring.redis.password: MTIzNDU2
+type: Opaque
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-boot-kube-configmap
+  namespace: spring-boot-kube-ns
+data:
+  application.properties: |-
+    server.port=8080
+    spring.redis.host=10.211.55.2
+    spring.redis.port=6379
+    spring.redis.lettuce.pool.max-active=8
+    spring.redis.lettuce.pool.min-idle=4
+    spring.redis.database=8
+    spring.redis.timeout=600000
+    logging.file.name=/workspace/logs/spring-boot-kube.log
+    logging.level.com.matrixboot=info
+    spring.application.name=app-service1
+    management.endpoint.restart.enabled=true
+    management.server.port=9090
+    management.endpoints.web.exposure.include=*
+    management.endpoint.health.probes.enabled=true
+
+
+
+
+
