@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: spring-boot-kube
-          image: registry.cn-hangzhou.aliyuncs.com/shishaodong/spring-boot-kube:0.0.1
+          image: shishaodong/spring-boot-kube:0.0.2
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -32,7 +32,7 @@ spec:
               port: 9090
               path: /actuator/health/readiness
               scheme: HTTP
-            initialDelaySeconds: 30
+            initialDelaySeconds: 120
             periodSeconds: 5
             timeoutSeconds: 10
             failureThreshold: 3
@@ -41,12 +41,12 @@ spec:
               port: 9090
               path: /actuator/health/liveness
               scheme: HTTP
-            initialDelaySeconds: 30
+            initialDelaySeconds: 120
             periodSeconds: 5
             failureThreshold: 3
-#          envFrom:
-#            - secretRef:
-#                name: spring-boot-kube-secret
+          envFrom:
+            - secretRef:
+                name: spring-boot-kube-secret
           volumeMounts:
             - mountPath: /workspace/config
               name: kube-configmap
@@ -55,20 +55,6 @@ spec:
           configMap:
             name: spring-boot-kube-configmap
       restartPolicy: Always
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: spring-boot-kube-service
-  namespace: spring-boot-kube-ns
-spec:
-  selector:
-    app: spring-boot-kube
-  ports:
-    - port: 8080
-      targetPort: 8080
-  type: NodePort
 
 ---
 apiVersion: v1
@@ -103,7 +89,37 @@ data:
     management.endpoints.web.exposure.include=*
     management.endpoint.health.probes.enabled=true
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-kube-service
+  namespace: spring-boot-kube-ns
+spec:
+  selector:
+    app: spring-boot-kube
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: NodePort
 
-
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spring-boot-kube-ingress
+  namespace: spring-boot-kube-ns
+spec:
+  rules:
+    - host: www.matrixboot.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: spring-boot-kube-service
+                port:
+                  number: 8080
 
 

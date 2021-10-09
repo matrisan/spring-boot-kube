@@ -48,11 +48,11 @@ bootBuildImage {
     imageName = "shishaodong/${project.name}:${project.version}"
     builder = "paketobuildpacks/builder:0.1.236-full"
     runImage = "paketobuildpacks/run:1.2.41-full-cnb"
-    publish = true
+    publish = false
     docker{
         tlsVerify = false
         environment = ["BPL_JVM_THREAD_COUNT": "50", "JAVA_TOOL_OPTIONS": "-Xmx200m -Xms200m"]
-        host = DOCKER_BUILD_HOST
+//        host = DOCKER_BUILD_HOST
         publishRegistry {
             username = PUB_USERNAME
             password = PUB_PASSWORD

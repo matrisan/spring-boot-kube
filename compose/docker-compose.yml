@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web-kube:
+    container_name: spring-boot-kube
+    image: shishaodong/spring-boot-kube:0.0.2
+    networks:
+      - container:redis_6.0.9
+  ding-net:
+    build: ./ding-net/Dockerfile
+    container_name: ding-net
+    networks:
+      - container:redis_6.0.9
+
+
