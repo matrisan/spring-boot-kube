@@ -4,9 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -30,6 +35,12 @@ public class ConsumerFacade implements CommandLineRunner {
         log.info(s);
         String hello = redisTemplate.opsForValue().get("hello");
         return s + "----" + hello;
+    }
+
+    @PostMapping("upload")
+    public String upload(@RequestParam("file") MultipartFile file) throws IOException {
+        file.transferTo(new File("/tmp/file-" + new Date()));
+        return "success";
     }
 
     @Override

@@ -1,11 +1,11 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.5'
+    id 'org.springframework.boot' version '2.5.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
 group = 'com.matrixboot'
-version = '0.0.2'
+version = '0.0.3'
 sourceCompatibility = '11'
 
 configurations {
@@ -45,13 +45,18 @@ dependencyManagement {
 }
 
 bootBuildImage {
-    imageName = "shishaodong/${project.name}:${project.version}"
-    builder = "paketobuildpacks/builder:0.1.236-full"
-    runImage = "paketobuildpacks/run:1.2.41-full-cnb"
-    publish = false
-    docker{
+    imageName = "registry.cn-hangzhou.aliyuncs.com/shishaodong/${project.name}:${project.version}"
+    builder = "paketobuildpacks/builder:0.1.255-full"
+    runImage = "paketobuildpacks/run:1.2.46-full-cnb"
+    environment = [
+            "BP_JVM_VERSION": "11",
+            "BPE_OVERRIDE_BPL_JVM_THREAD_COUNT": "50",
+            "BPE_OVERRIDE_BPL_DEBUG_ENABLED": "true",
+            "BPE_OVERRIDE_JAVA_TOOL_OPTIONS": "-Xmx200m -Xms200m -Xss256k"
+    ]
+    publish = true
+    docker {
         tlsVerify = false
-        environment = ["BPL_JVM_THREAD_COUNT": "50", "JAVA_TOOL_OPTIONS": "-Xmx200m -Xms200m"]
 //        host = DOCKER_BUILD_HOST
         publishRegistry {
             username = PUB_USERNAME

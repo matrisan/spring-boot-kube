@@ -1,28 +1,27 @@
-2021-10-07 22:34:59.492  INFO 54390 --- [restartedMain] c.m.s.b.kube.SpringBootKubeApplication   : Starting SpringBootKubeApplication using Java 11.0.12 on shi with PID 54390 (/Users/shishaodong/IdeaProjects/spring-boot-kube/build/classes/java/main started by shishaodong in /Users/shishaodong/IdeaProjects/spring-boot-kube)
-2021-10-07 22:34:59.503  INFO 54390 --- [restartedMain] c.m.s.b.kube.SpringBootKubeApplication   : No active profile set, falling back to default profiles: default
-2021-10-07 22:34:59.628  INFO 54390 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2021-10-07 22:34:59.628  INFO 54390 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2021-10-07 22:35:01.295  INFO 54390 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2021-10-07 22:35:01.298  INFO 54390 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2021-10-07 22:35:01.327  INFO 54390 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
-2021-10-07 22:35:01.952  INFO 54390 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=9ab018ae-ed18-3247-ab80-c5eb3b54140f
-2021-10-07 22:35:02.823  INFO 54390 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2021-10-07 22:35:02.844  INFO 54390 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-10-07 22:35:02.844  INFO 54390 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.53]
-2021-10-07 22:35:03.009  INFO 54390 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-10-07 22:35:03.010  INFO 54390 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3381 ms
-2021-10-07 22:35:05.265  INFO 54390 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2021-10-07 22:35:06.046  INFO 54390 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2021-10-07 22:35:06.502  INFO 54390 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
-2021-10-07 22:35:06.504  INFO 54390 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-10-07 22:35:06.505  INFO 54390 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.53]
-2021-10-07 22:35:06.539  INFO 54390 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
-2021-10-07 22:35:06.540  INFO 54390 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 467 ms
-2021-10-07 22:35:06.582  INFO 54390 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 19 endpoint(s) beneath base path '/actuator'
-2021-10-07 22:35:06.684  INFO 54390 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
-2021-10-07 22:35:06.720  INFO 54390 --- [restartedMain] c.m.s.b.kube.SpringBootKubeApplication   : Started SpringBootKubeApplication in 8.03 seconds (JVM running for 10.772)
-2021-10-07 22:35:07.178  INFO 54390 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-10-07 22:35:07.180  INFO 54390 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-10-07 22:35:07.183  INFO 54390 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2021-10-07 22:35:07.349  INFO 54390 --- [http-nio-8080-exec-1] c.m.s.b.k.controller.ConsumerController  : Hello World! Thu Oct 07 22:35:07 CST 2021
-2021-10-07 22:49:50.945  INFO 54390 --- [http-nio-8080-exec-3] c.m.s.b.k.controller.ConsumerController  : Hello World! Thu Oct 07 22:49:50 CST 2021
+2021-11-05 20:10:34.221  INFO 27060 --- [restartedMain] c.m.s.b.kube.SpringBootKubeApplication   : Starting SpringBootKubeApplication using Java 11.0.13 on shi.local with PID 27060 (/Users/shishaodong/IdeaProjects/spring-boot-kube/build/classes/java/main started by shishaodong in /Users/shishaodong/IdeaProjects/spring-boot-kube)
+2021-11-05 20:10:34.227  INFO 27060 --- [restartedMain] c.m.s.b.kube.SpringBootKubeApplication   : No active profile set, falling back to default profiles: default
+2021-11-05 20:10:34.341  INFO 27060 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-11-05 20:10:34.341  INFO 27060 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-11-05 20:10:36.722  INFO 27060 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-05 20:10:36.725  INFO 27060 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-11-05 20:10:36.770  INFO 27060 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+2021-11-05 20:10:37.084  INFO 27060 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=095001a4-7e27-3ef7-b206-1b42080d5e35
+2021-11-05 20:10:38.009  INFO 27060 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-11-05 20:10:38.024  INFO 27060 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-11-05 20:10:38.025  INFO 27060 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.54]
+2021-11-05 20:10:38.125  INFO 27060 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-11-05 20:10:38.125  INFO 27060 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3783 ms
+2021-11-05 20:10:39.597  INFO 27060 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-11-05 20:10:39.749  INFO 27060 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-11-05 20:10:39.874  INFO 27060 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2021-11-05 20:10:39.875  INFO 27060 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-11-05 20:10:39.876  INFO 27060 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.54]
+2021-11-05 20:10:39.895  INFO 27060 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2021-11-05 20:10:39.896  INFO 27060 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 138 ms
+2021-11-05 20:10:39.910  INFO 27060 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 19 endpoint(s) beneath base path '/actuator'
+2021-11-05 20:10:39.966  INFO 27060 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2021-11-05 20:10:39.998  INFO 27060 --- [restartedMain] c.m.s.b.kube.SpringBootKubeApplication   : Started SpringBootKubeApplication in 6.438 seconds (JVM running for 8.87)
+2021-11-05 20:10:42.324  INFO 27060 --- [RMI TCP Connection(3)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-11-05 20:10:42.326  INFO 27060 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-11-05 20:10:42.331  INFO 27060 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-11-05 20:12:13.692  WARN 27060 --- [http-nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]

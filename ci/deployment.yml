@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: spring-boot-kube
-          image: shishaodong/spring-boot-kube:0.0.2
+          image: registry.cn-hangzhou.aliyuncs.com/shishaodong/spring-boot-kube:0.0.3
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -32,7 +32,7 @@ spec:
               port: 9090
               path: /actuator/health/readiness
               scheme: HTTP
-            initialDelaySeconds: 120
+            initialDelaySeconds: 100
             periodSeconds: 5
             timeoutSeconds: 10
             failureThreshold: 3
@@ -41,7 +41,7 @@ spec:
               port: 9090
               path: /actuator/health/liveness
               scheme: HTTP
-            initialDelaySeconds: 120
+            initialDelaySeconds: 100
             periodSeconds: 5
             failureThreshold: 3
           envFrom:
@@ -80,7 +80,9 @@ data:
     spring.redis.lettuce.pool.max-active=8
     spring.redis.lettuce.pool.min-idle=4
     spring.redis.database=8
-    spring.redis.timeout=600000
+    spring.redis.timeout=60000
+    spring.servlet.multipart.max-file-size=200MB
+    spring.servlet.multipart.max-request-size=200MB
     logging.file.name=/workspace/logs/spring-boot-kube.log
     logging.level.com.matrixboot=info
     spring.application.name=app-service1
@@ -109,6 +111,8 @@ kind: Ingress
 metadata:
   name: spring-boot-kube-ingress
   namespace: spring-boot-kube-ns
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
 spec:
   rules:
     - host: www.matrixboot.com
