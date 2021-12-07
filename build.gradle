@@ -54,15 +54,15 @@ bootBuildImage {
             "BPE_OVERRIDE_BPL_DEBUG_ENABLED": "true",
             "BPE_OVERRIDE_JAVA_TOOL_OPTIONS": "-Xmx200m -Xms200m -Xss256k"
     ]
-    publish = true
+    publish = false
     docker {
         tlsVerify = false
 //        host = DOCKER_BUILD_HOST
         publishRegistry {
-            username = PUB_USERNAME
-            password = PUB_PASSWORD
-            url = PUB_URL
-            email = PUB_EMAIL
+//            username = PUB_USERNAME
+//            password = PUB_PASSWORD
+//            url = PUB_URL
+//            email = PUB_EMAIL
         }
     }
 }
