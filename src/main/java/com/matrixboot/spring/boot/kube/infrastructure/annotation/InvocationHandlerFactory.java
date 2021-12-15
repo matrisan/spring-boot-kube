@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * TODO
  * <p>
  * create in 2021/12/15 12:15 AM
  *
@@ -24,6 +23,7 @@ public interface InvocationHandlerFactory {
     interface MethodHandler {
 
         Object invoke(Object[] argv) throws Throwable;
+
     }
 
     class Default implements InvocationHandlerFactory {

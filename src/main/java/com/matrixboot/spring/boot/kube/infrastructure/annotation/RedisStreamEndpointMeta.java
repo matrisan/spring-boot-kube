@@ -1,4 +1,4 @@
-package com.matrixboot.spring.boot.kube.domain;
+package com.matrixboot.spring.boot.kube.infrastructure.annotation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * <p>
- * create in 2021/12/14 10:25 PM
+ * create in 2021/12/15 4:24 PM
  *
  * @author shishaodong
  * @version 0.0.1
@@ -14,8 +14,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInfoEntity {
+public class RedisStreamEndpointMeta {
 
-    private String username;
+    private String value;
+
+    private String serializer;
 
 }

@@ -5,7 +5,6 @@ import com.matrixboot.spring.boot.kube.infrastructure.annotation.RedisStreamClie
 import com.matrixboot.spring.boot.kube.infrastructure.annotation.RedisStreamEndpoint;
 
 /**
- * TODO
  * <p>
  * create in 2021/12/14 10:20 PM
  *
@@ -16,6 +15,6 @@ import com.matrixboot.spring.boot.kube.infrastructure.annotation.RedisStreamEndp
 public interface RedisStreamAccess {
 
     @RedisStreamEndpoint("test_key")
-    void stream(UserInfoEntity entity);
+    int stream(UserInfoEntity entity);
 
 }

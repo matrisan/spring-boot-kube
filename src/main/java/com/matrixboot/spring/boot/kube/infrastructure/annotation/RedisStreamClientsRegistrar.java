@@ -19,7 +19,6 @@ import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -54,16 +53,15 @@ public class RedisStreamClientsRegistrar implements ImportBeanDefinitionRegistra
                 // verify annotated class is an interface
                 AnnotatedBeanDefinition beanDefinition = (AnnotatedBeanDefinition) candidateComponent;
                 AnnotationMetadata annotationMetadata = beanDefinition.getMetadata();
-                Assert.isTrue(annotationMetadata.isInterface(), "@FeignClient can only be specified on an interface");
+                Assert.isTrue(annotationMetadata.isInterface(), "@RedisStreamClient can only be specified on an interface");
                 Map<String, Object> attributes = annotationMetadata.getAnnotationAttributes(RedisStreamClient.class.getCanonicalName());
-                String name = getClientName(attributes);
-//                registerClientConfiguration(registry, name, attributes.get("configuration"));
-
+                assert attributes != null;
                 registerRedisStreamClient(registry, annotationMetadata, attributes);
             }
         }
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private void registerRedisStreamClient(BeanDefinitionRegistry registry, AnnotationMetadata annotationMetadata, Map<String, Object> attributes) {
         String className = annotationMetadata.getClassName();
         Class clazz = ClassUtils.resolveClassName(className, null);
@@ -71,12 +69,8 @@ public class RedisStreamClientsRegistrar implements ImportBeanDefinitionRegistra
         RedisStreamClientFactoryBean factoryBean = new RedisStreamClientFactoryBean();
         assert beanFactory != null;
         factoryBean.setBeanFactory(beanFactory);
-        factoryBean.setName(getClientName(attributes));
         factoryBean.setType(clazz);
-        BeanDefinitionBuilder definition = BeanDefinitionBuilder.genericBeanDefinition(clazz, () -> {
-            factoryBean.setEncode((String) attributes.get("encode"));
-            return factoryBean.getObject();
-        });
+        BeanDefinitionBuilder definition = BeanDefinitionBuilder.genericBeanDefinition(clazz, factoryBean::getObject);
         definition.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
         definition.setLazyInit(true);
         AbstractBeanDefinition beanDefinition = definition.getBeanDefinition();
@@ -90,26 +84,8 @@ public class RedisStreamClientsRegistrar implements ImportBeanDefinitionRegistra
     }
 
     protected Set<String> getBasePackages(AnnotationMetadata importingClassMetadata) {
-        Map<String, Object> attributes = importingClassMetadata.getAnnotationAttributes(EnableRedisStreamClients.class.getCanonicalName());
-
         Set<String> basePackages = new HashSet<>();
-//        for (String pkg : (String[]) attributes.get("value")) {
-//            if (StringUtils.hasText(pkg)) {
-//                basePackages.add(pkg);
-//            }
-//        }
-//        for (String pkg : (String[]) attributes.get("basePackages")) {
-//            if (StringUtils.hasText(pkg)) {
-//                basePackages.add(pkg);
-//            }
-//        }
-//        for (Class<?> clazz : (Class[]) attributes.get("basePackageClasses")) {
-//            basePackages.add(ClassUtils.getPackageName(clazz));
-//        }
-//
-        if (basePackages.isEmpty()) {
-            basePackages.add(ClassUtils.getPackageName(importingClassMetadata.getClassName()));
-        }
+        basePackages.add(ClassUtils.getPackageName(importingClassMetadata.getClassName()));
         return basePackages;
     }
 
@@ -118,37 +94,9 @@ public class RedisStreamClientsRegistrar implements ImportBeanDefinitionRegistra
         return new ClassPathScanningCandidateComponentProvider(false, this.environment) {
             @Override
             protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
-                boolean isCandidate = false;
-                if (beanDefinition.getMetadata().isIndependent()) {
-                    if (!beanDefinition.getMetadata().isAnnotation()) {
-                        isCandidate = true;
-                    }
-                }
-                return isCandidate;
+                return beanDefinition.getMetadata().isIndependent() && (!beanDefinition.getMetadata().isAnnotation());
             }
         };
-    }
-
-
-    private String getClientName(Map<String, Object> client) {
-        if (client == null) {
-            return null;
-        }
-        String value = (String) client.get("contextId");
-        if (!StringUtils.hasText(value)) {
-            value = (String) client.get("value");
-        }
-        if (!StringUtils.hasText(value)) {
-            value = (String) client.get("name");
-        }
-        if (!StringUtils.hasText(value)) {
-            value = (String) client.get("serviceId");
-        }
-        if (StringUtils.hasText(value)) {
-            return value;
-        }
-
-        throw new IllegalStateException("Either 'name' or 'value' must be provided in @" + RedisStreamClient.class.getSimpleName());
     }
 
     @Override

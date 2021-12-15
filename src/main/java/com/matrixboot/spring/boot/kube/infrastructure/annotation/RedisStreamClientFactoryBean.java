@@ -10,8 +10,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -20,28 +22,30 @@ import java.util.HashMap;
  * @author shishaodong
  * @version 0.0.1
  */
-public class RedisStreamClientFactoryBean implements FactoryBean<Object>, InitializingBean, ApplicationContextAware, BeanFactoryAware {
-
-    private BeanFactory beanFactory;
+public class RedisStreamClientFactoryBean implements FactoryBean<Object>, InitializingBean, BeanFactoryAware {
 
     private Class<?> type;
 
-    private String name;
+    private final InvocationHandlerFactory factory = new InvocationHandlerFactory.Default();
 
-    private String encode;
-
-    private InvocationHandlerFactory factory = new InvocationHandlerFactory.Default();
-
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        this.beanFactory = beanFactory;
-    }
+    private BeanFactory beanFactory;
 
     @Override
     public Object getObject() {
         Target<?> target = new HardCodedTarget<>();
-        InvocationHandler handler = factory.create(target, new HashMap<>());
+        InvocationHandler handler = factory.create(target, getMethodHandler());
         return Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[]{type}, handler);
+    }
+
+    private Map<Method, InvocationHandlerFactory.MethodHandler> getMethodHandler() {
+        Map<Method, InvocationHandlerFactory.MethodHandler> map = new HashMap<>();
+        for (Method method : type.getMethods()) {
+            if (method.isAnnotationPresent(RedisStreamEndpoint.class)) {
+                RedisStreamEndpoint annotation = method.getAnnotation(RedisStreamEndpoint.class);
+                map.put(method, new DefaultMethodHandler(new RedisStreamEndpointMeta(annotation.value(), annotation.encode()), beanFactory));
+            }
+        }
+        return map;
     }
 
     @Override
@@ -55,20 +59,12 @@ public class RedisStreamClientFactoryBean implements FactoryBean<Object>, Initia
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
     }
 
     public void setType(Class<?> type) {
         this.type = type;
-    }
-
-    public void setEncode(String encode) {
-        this.encode = encode;
     }
 
 }
