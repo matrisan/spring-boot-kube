@@ -45,24 +45,24 @@ dependencyManagement {
 }
 
 bootBuildImage {
-    imageName = "registry.cn-hangzhou.aliyuncs.com/shishaodong/${project.name}:${project.version}"
+    imageName = "shishaodong/${project.name}:${project.version}"
+//    imageName = "registry.cn-hangzhou.aliyuncs.com/shishaodong/${project.name}:${project.version}"
     builder = "paketobuildpacks/builder:0.1.255-full"
     runImage = "paketobuildpacks/run:1.2.46-full-cnb"
     environment = [
-            "BP_JVM_VERSION": "11",
+            "BP_JVM_VERSION"                   : "11",
             "BPE_OVERRIDE_BPL_JVM_THREAD_COUNT": "50",
-            "BPE_OVERRIDE_BPL_DEBUG_ENABLED": "true",
-            "BPE_OVERRIDE_JAVA_TOOL_OPTIONS": "-Xmx200m -Xms200m -Xss256k"
+            "BPE_OVERRIDE_BPL_DEBUG_ENABLED"   : "true",
+            "BPE_OVERRIDE_JAVA_TOOL_OPTIONS"   : "-Xmx200m -Xms200m -Xss256k"
     ]
-    publish = false
+    publish = true
     docker {
         tlsVerify = false
-//        host = DOCKER_BUILD_HOST
         publishRegistry {
-//            username = PUB_USERNAME
-//            password = PUB_PASSWORD
-//            url = PUB_URL
-//            email = PUB_EMAIL
+            username = PUB_USERNAME
+            password = PUB_PASSWORD
+            url = PUB_URL
+            email = PUB_EMAIL
         }
     }
 }

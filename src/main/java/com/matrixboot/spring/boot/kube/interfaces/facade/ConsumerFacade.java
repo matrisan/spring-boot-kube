@@ -1,5 +1,6 @@
 package com.matrixboot.spring.boot.kube.interfaces.facade;
 
+import com.matrixboot.spring.boot.kube.infrastructure.RedisStreamAccess;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -28,6 +29,9 @@ public class ConsumerFacade implements CommandLineRunner {
 
     @Resource
     private RedisTemplate<String, String> redisTemplate;
+
+    @Resource
+    private RedisStreamAccess redisStreamAccess;
 
     @GetMapping("hello")
     public String hello() {
