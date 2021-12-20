@@ -1,0 +1,18 @@
+POST http://localhost:8080/idempotent1
+Content-Type: application/json
+
+{
+  "username": "123456",
+  "password": "qazwsx"
+}
+
+###
+POST http://localhost:8080/idempotent2
+Content-Type: application/json
+
+{
+  "username": "123456",
+  "password": "qazwsx"
+}
+
+###
