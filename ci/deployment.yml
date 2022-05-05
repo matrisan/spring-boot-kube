@@ -101,7 +101,7 @@ spec:
   selector:
     app: spring-boot-kube
   ports:
-    - port: 8080
+    - port: 80
       targetPort: 8080
   type: NodePort
 
@@ -124,6 +124,6 @@ spec:
               service:
                 name: spring-boot-kube-service
                 port:
-                  number: 8080
+                  number: 80
 
 
